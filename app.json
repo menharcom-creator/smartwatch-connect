@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "SmartWatchConnect",
+    "slug": "smartwatch-connect",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
+    "ios": {
+      "bundleIdentifier": "com.menhar.smartwatchconnect",
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSBluetoothAlwaysUsageDescription": "SmartWatch Connect uses Bluetooth to find and talk to your smartwatch."
+      }
+    },
+    "android": {
+      "package": "com.menhar.smartwatchconnect"
+    },
+    "plugins": [
+      [
+        "react-native-ble-plx",
+        {
+          "isBackgroundEnabled": false,
+          "neverForLocation": true,
+          "bluetoothAlwaysPermission": "SmartWatch Connect uses Bluetooth to find and talk to your smartwatch."
+        }
+      ]
+    ]
+  }
+}

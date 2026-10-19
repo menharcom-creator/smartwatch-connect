@@ -1,0 +1,27 @@
+{
+  "name": "smartwatch-connect",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
+  },
+  "jest": { "preset": "jest-expo" },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "expo": "~52.0.0",
+    "expo-status-bar": "~2.0.0",
+    "react": "18.3.1",
+    "react-native": "0.76.9",
+    "react-native-ble-plx": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@types/jest": "^29.5.12",
+    "@types/react": "~18.3.12",
+    "jest": "^29.2.1",
+    "jest-expo": "~52.0.0",
+    "typescript": "~5.3.3"
+  }
+}
