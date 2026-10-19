@@ -1,0 +1,39 @@
+name: Build unsigned IPA
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run tests
+        run: npm test -- --ci
+
+      - name: Generate native iOS project
+        run: npx expo prebuild --platform ios --no-install && cd ios && pod install
+
+      - name: Build (no code signing)
+        run: |
+          xcodebuild -workspace ios/SmartWatchConnect.xcworkspace -scheme SmartWatchConnect \
+            -configuration Release -sdk iphoneos -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            | tail -n 60
+
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/SmartWatchConnect.app Payload/
+          zip -qr SmartWatchConnect-unsigned.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SmartWatchConnect-unsigned-ipa
+          path: SmartWatchConnect-unsigned.ipa
